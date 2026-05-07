@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aayan Nadaf Web Technology Laboratory Portfolio - HTML, CSS, XML and XSL assignments.">
+  <title>Aayan Nadaf | Web Technology Portfolio</title>
+  <style>
+    :root {
+      --bg: #050816;
+      --panel: rgba(255, 255, 255, 0.075);
+      --panel-strong: rgba(255, 255, 255, 0.12);
+      --line: rgba(255, 255, 255, 0.16);
+      --text: #f8fbff;
+      --muted: rgba(248, 251, 255, 0.68);
+      --soft: rgba(248, 251, 255, 0.48);
+      --cyan: #56f0ff;
+      --mint: #67ffba;
+      --rose: #ff6b9a;
+      --gold: #ffd166;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(86, 240, 255, 0.25), transparent 31%),
+        radial-gradient(circle at 86% 20%, rgba(255, 107, 154, 0.22), transparent 28%),
+        radial-gradient(circle at 58% 84%, rgba(103, 255, 186, 0.14), transparent 34%),
+        var(--bg);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.75), transparent 85%);
+      animation: gridMove 18s linear infinite;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -30%;
+      z-index: -2;
+      background:
+        conic-gradient(from 180deg at 50% 50%, rgba(86, 240, 255, 0.10), rgba(255, 107, 154, 0.12), rgba(103, 255, 186, 0.10), rgba(86, 240, 255, 0.10));
+      filter: blur(80px);
+      opacity: 0.8;
+      animation: aura 14s ease-in-out infinite alternate;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    @keyframes gridMove {
+      from { background-position: 0 0; }
+      to { background-position: 72px 72px; }
+    }
+
+    @keyframes aura {
+      from { transform: rotate(0deg) scale(1); }
+      to { transform: rotate(18deg) scale(1.08); }
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 14px auto 0;
+      padding: 12px 14px 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(5, 8, 22, 0.58);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--mint);
+      box-shadow: 0 0 22px rgba(103, 255, 186, 0.9);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 650;
+      transition: 180ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .hero {
+      min-height: calc(100vh - 78px);
+      display: grid;
+      grid-template-columns: 1.07fr 0.93fr;
+      align-items: center;
+      gap: 34px;
+      padding: 74px 0 58px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 9px 14px;
+      border: 1px solid rgba(86, 240, 255, 0.26);
+      border-radius: 999px;
+      background: rgba(86, 240, 255, 0.09);
+      color: #d9fbff;
+      font-size: 0.76rem;
+      font-weight: 850;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      backdrop-filter: blur(18px);
+    }
+
+    .pulse {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--mint);
+      box-shadow: 0 0 0 0 rgba(103, 255, 186, 0.8);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      50% { box-shadow: 0 0 0 9px rgba(103, 255, 186, 0); }
+    }
+
+    h1 {
+      max-width: 820px;
+      font-size: clamp(3.5rem, 9vw, 7.6rem);
+      line-height: 0.9;
+      letter-spacing: -0.07em;
+      font-weight: 950;
+    }
+
+    .gradient-text {
+      display: block;
+      background: linear-gradient(100deg, var(--cyan), #ffffff 45%, var(--rose));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      max-width: 680px;
+      margin-top: 25px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.85;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #fff;
+      font-weight: 800;
+      transition: 200ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.22), transparent 45%, rgba(255,255,255,0.08));
+      opacity: 0.85;
+    }
+
+    .button span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, rgba(86, 240, 255, 0.28), rgba(255, 107, 154, 0.24));
+      box-shadow: 0 18px 45px rgba(86, 240, 255, 0.15);
+      backdrop-filter: blur(16px);
+    }
+
+    .button.ghost {
+      background: rgba(255, 255, 255, 0.055);
+      color: rgba(255,255,255,0.78);
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.42);
+      box-shadow: 0 22px 65px rgba(0, 0, 0, 0.28);
+    }
+
+    .profile-card {
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.13), rgba(255,255,255,0.045));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(26px);
+      padding: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: radial-gradient(circle at 20% 0%, rgba(86,240,255,0.32), transparent 34%),
+                  radial-gradient(circle at 100% 10%, rgba(255,107,154,0.28), transparent 32%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .profile-inner {
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      background: rgba(5, 8, 22, 0.46);
+      padding: 28px;
+    }
+
+    .avatar-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .card-kicker {
+      color: var(--soft);
+      font-size: 0.74rem;
+      font-weight: 850;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    .profile-inner h2 {
+      margin-top: 8px;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .avatar {
+      width: 68px;
+      height: 68px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 1.35rem;
+      font-weight: 950;
+      box-shadow: inset 0 1px 22px rgba(255,255,255,0.12);
+    }
+
+    .detail-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .detail {
+      padding: 15px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      background: rgba(0,0,0,0.18);
+      transition: 180ms ease;
+    }
+
+    .detail:hover {
+      transform: translateX(4px);
+      border-color: rgba(86, 240, 255, 0.36);
+      background: rgba(255,255,255,0.075);
+    }
+
+    .detail span {
+      display: block;
+      color: var(--soft);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .detail strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.18rem;
+    }
+
+    .status {
+      margin-top: 18px;
+      padding: 14px 15px;
+      border: 1px solid rgba(103, 255, 186, 0.22);
+      border-radius: 18px;
+      background: rgba(103, 255, 186, 0.08);
+      color: #cafbe3;
+      font-weight: 750;
+    }
+
+    .section {
+      padding: 58px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+
+    .section-heading p {
+      max-width: 500px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      min-height: 252px;
+      display: flex;
+      flex-direction: column;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(150deg, rgba(255,255,255,0.105), rgba(255,255,255,0.045));
+      box-shadow: 0 18px 50px rgba(0,0,0,0.22);
+      backdrop-filter: blur(20px);
+      transition: 220ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: auto -25% -40% -25%;
+      height: 105px;
+      background: radial-gradient(circle, rgba(86,240,255,0.18), transparent 70%);
+      opacity: 0;
+      transition: 220ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(86, 240, 255, 0.35);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.34);
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    .chip {
+      width: max-content;
+      max-width: 100%;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 209, 102, 0.12);
+      border: 1px solid rgba(255, 209, 102, 0.25);
+      color: #ffe7a6;
+      font-size: 0.74rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .card h3 {
+      margin-top: 18px;
+      font-size: 1.23rem;
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mini-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 0 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.82);
+      font-size: 0.83rem;
+      font-weight: 800;
+      transition: 180ms ease;
+    }
+
+    .mini-link:hover {
+      background: rgba(86, 240, 255, 0.14);
+      border-color: rgba(86, 240, 255, 0.34);
+      color: #fff;
+    }
+
+    .xml .chip {
+      background: rgba(103, 255, 186, 0.10);
+      border-color: rgba(103, 255, 186, 0.24);
+      color: #bdffe0;
+    }
+
+    .submission {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 22px;
+      align-items: center;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: linear-gradient(135deg, rgba(86,240,255,0.10), rgba(255,107,154,0.10));
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow);
+    }
+
+    .submission h2 {
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      letter-spacing: -0.04em;
+    }
+
+    .submission p {
+      margin-top: 8px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    footer {
+      padding: 38px 0 46px;
+      color: var(--soft);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 920px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 52px;
+      }
+
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .submission {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .nav {
+        align-items: flex-start;
+        border-radius: 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 42px 0 34px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 18vw, 5rem);
+      }
+
+      .profile-inner {
+        padding: 20px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero-actions,
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav shell" aria-label="Main navigation">
+    <a class="brand" href="#top"><span class="brand-mark"></span>Aayan Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="#html">HTML</a></li>
+      <li><a href="#xml">XML / XSL</a></li>
+      <li><a href="#submit">Submit</a></li>
+    </ul>
+  </nav>
+
+  <main id="top" class="shell">
+    <section class="hero" aria-label="Portfolio introduction">
+      <div>
+        <div class="eyebrow"><span class="pulse"></span>Welcome</div>
+        <h1>
+          Laboratory
+          <span class="gradient-text">Showcase</span>
+        </h1>
+        <p class="lead">
+          Web Tech Portfolio Hub: a curated collection of web technology assignments,
+          showcasing frontend fundamentals and structured data systems through HTML,
+          CSS, XML and XSL.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#html"><span>View Assignments</span></a>
+          <a class="button ghost" href="hub.html"><span>Open Classic Hub</span></a>
+        </div>
+      </div>
+
+      <aside class="profile-card" aria-label="Student details">
+        <div class="profile-inner">
+          <div class="avatar-row">
+            <div>
+              <p class="card-kicker">Student Profile</p>
+              <h2>Aayan Nadaf</h2>
+            </div>
+            <div class="avatar">AN</div>
+          </div>
+          <div class="detail-grid">
+            <div class="detail"><span>Name</span><strong>Aayan Nadaf</strong></div>
+            <div class="detail"><span>Roll No.</span><strong>124</strong></div>
+            <div class="detail"><span>Div / Dept</span><strong>A / CSE</strong></div>
+            <div class="detail"><span>Guide</span><strong>Prof. S. S. Kore</strong></div>
+          </div>
+          <div class="status">Portfolio is ready for review through a single GitHub Pages link.</div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="html" class="section" aria-labelledby="html-title">
+      <div class="section-heading">
+        <div>
+          <p class="card-kicker">Web Tech</p>
+          <h2 id="html-title">HTML Assignments</h2>
+        </div>
+        <p>Each card opens the original assignment file. The original files remain unchanged.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <span class="chip">Assignment 01</span>
+          <h3>First HTML Page</h3>
+          <p>Introductory HTML document with headings and basic page structure.</p>
+          <div class="actions"><a class="mini-link" href="Assignment 1.html">Open File</a></div>
+        </article>
+
+        <article class="card">
+          <span class="chip">Assignment 02</span>
+          <h3>Static Web Page</h3>
+          <p>Basic content page using headings, paragraphs and simple structure.</p>
+          <div class="actions"><a class="mini-link" href="Assignmnet 2.html">Open File</a></div>
+        </article>
+
+        <article class="card">
+          <span class="chip">Assignment 03</span>
+          <h3>Text Formatting</h3>
+          <p>Demonstrates text formatting tags such as bold, italic, underline and more.</p>
+          <div class="actions"><a class="mini-link" href="Assignment 3.html">Open File</a></div>
+        </article>
+
+        <article class="card">
+          <span class="chip">Assignment 04</span>
+          <h3>HTML Lists</h3>
+          <p>Shows ordered, unordered and definition lists for structured content.</p>
+          <div class="actions"><a class="mini-link" href="Assignmnet 4.html">Open File</a></div>
+        </article>
+
+        <article class="card">
+          <span class="chip">Experiment 05</span>
+          <h3>Images and Video</h3>
+          <p>Uses multimedia elements to embed visual content in an HTML page.</p>
+          <div class="actions"><a class="mini-link" href="Experiment 5.html">Open File</a></div>
+        </article>
+
+        <article class="card">
+          <span class="chip">Assignment 06</span>
+          <h3>Iframe Embed</h3>
+          <p>Demonstrates external page embedding with an HTML iframe.</p>
+          <div class="actions"><a class="mini-link" href="Assignment 6.html">Open File</a></div>
+        </article>
+
+        <article class="card">
+          <span class="chip">Assignment 07</span>
+          <h3>Class Timetable</h3>
+          <p>Creates a timetable layout using HTML table rows and columns.</p>
+          <div class="actions"><a class="mini-link" href="Assignment 7.html">Open File</a></div>
+        </article>
+
+        <article class="card">
+          <span class="chip">Assignment 08</span>
+          <h3>Advanced Table</h3>
+          <p>Another timetable/table structure for organizing schedule data.</p>
+          <div class="actions"><a class="mini-link" href="Assignment 8.html">Open File</a></div>
+        </article>
+
+        <article class="card">
+          <span class="chip">Assignment 09</span>
+          <h3>Student Form</h3>
+          <p>Registration form using input fields, options and form controls.</p>
+          <div class="actions"><a class="mini-link" href="Assignment 9.html">Open File</a></div>
+        </article>
+
+        <article class="card">
+          <span class="chip">Assignment 10</span>
+          <h3>Resume Page</h3>
+          <p>Personal resume page styled with HTML and CSS concepts.</p>
+          <div class="actions"><a class="mini-link" href="Assignment 10.html">Open File</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="xml" class="section" aria-labelledby="xml-title">
+      <div class="section-heading">
+        <div>
+          <p class="card-kicker">Structured Data</p>
+          <h2 id="xml-title">XML and XSL Projects</h2>
+        </div>
+        <p>XML files, stylesheets and generated output pages are linked directly from the same portfolio.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card xml">
+          <span class="chip">Experiment 11</span>
+          <h3>Library XML</h3>
+          <p>Library records stored as XML and styled using a CSS file.</p>
+          <div class="actions">
+            <a class="mini-link" href="Exp11/library.xml">View XML</a>
+            <a class="mini-link" href="Exp11/library.css">View CSS</a>
+          </div>
+        </article>
+
+        <article class="card xml">
+          <span class="chip">Experiment 12</span>
+          <h3>CD Catalog</h3>
+          <p>XML and XSL transformation project with a generated HTML output.</p>
+          <div class="actions">
+            <a class="mini-link" href="Exp 12/cdcatlog.xml">XML</a>
+            <a class="mini-link" href="Exp 12/cdcatlog.xsl">XSL</a>
+            <a class="mini-link" href="Exp 12/cdcatlog_output.htm">Output</a>
+          </div>
+        </article>
+
+        <article class="card xml">
+          <span class="chip">Experiment 13</span>
+          <h3>Student Records</h3>
+          <p>Student data stored in XML and rendered through XSL into an HTML table.</p>
+          <div class="actions">
+            <a class="mini-link" href="Exp 13/students.xml">XML</a>
+            <a class="mini-link" href="Exp 13/students.xsl">XSL</a>
+            <a class="mini-link" href="Exp 13/students_output.htm">Output</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="submit" class="section">
+      <div class="submission">
+        <div>
+          <p class="card-kicker">Single Link Submission</p>
+          <h2>Share this portfolio through GitHub Pages.</h2>
+          <p>
+            After GitHub Pages is enabled, paste the public portfolio URL into your sir's spreadsheet or document.
+            If you have a Google Sheet or Docs URL, add it beside your name in that document.
+          </p>
+        </div>
+        <a class="button primary" href="#top"><span>Back to Top</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <p>Aayan Nadaf | Roll No. 124 | A / CSE | Guide: Prof. S. S. Kore</p>
+  </footer>
+</body>
+</html>
